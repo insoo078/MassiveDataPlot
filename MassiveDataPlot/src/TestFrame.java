@@ -30,7 +30,7 @@ public class TestFrame extends JFrame{
 		
 		this.remote = this;
 
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		this.setSize( 1024, 768 );
 		
 		this.originalDataPanel = new TestPanel();
