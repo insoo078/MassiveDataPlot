@@ -33,10 +33,10 @@ public class TestFrame extends JFrame{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize( 1024, 768 );
 		
-		this.originalDataPanel = new TestPanel(1, this);
+		this.originalDataPanel = new TestPanel();
 		this.originalDataPanel.setBackground(Color.WHITE);
 		
-		this.collpaseDataPanel = new TestPanel(2, this);
+		this.collpaseDataPanel = new TestPanel();
 		this.collpaseDataPanel.setBackground(Color.WHITE);
 		
 		JLabel lblOriginalData = new JLabel("Original Data");
@@ -56,7 +56,8 @@ public class TestFrame extends JFrame{
 					int PANEL_HEIGHT = originalDataPanel.getHeight();
 					int axisLen = 300;
 
-					List<Point> data = DataGenerator.makeData( n );
+//					List<Point> data = DataGenerator.makeData( n );
+					List<Point> data = DataGenerator.readData( "/Users/insoo078/Desktop/metadata.txt");
 					List<Point> plotData = DataGenerator.compactDataToPlot(data, PANEL_WIDTH, PANEL_HEIGHT, axisLen);
 
 					System.out.println( "Original data : " + data.size() );

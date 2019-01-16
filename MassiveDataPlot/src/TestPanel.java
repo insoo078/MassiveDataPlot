@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
 import java.text.NumberFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,9 +10,7 @@ import javax.swing.JPanel;
 
 public class TestPanel extends JPanel {
 	private List<Point> data;
-	
-	private int type;
-	private TestFrame frame;
+
 	private Map<String, Color> groupColorMap;
 	private Boundary bound;
 	/**
@@ -21,16 +18,19 @@ public class TestPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = -9132982378357189445L;
 	
-	public TestPanel( int type, TestFrame frame ) {
+	public TestPanel() {
 		this.data = null;
-		this.frame = frame;
-		this.type = type;
 		
 		this.groupColorMap = new LinkedHashMap<String, Color>();
+		this.groupColorMap.put("Group1", Color.red);
 		this.groupColorMap.put("Group1", Color.magenta);
 		this.groupColorMap.put("Group2", Color.blue);
 		this.groupColorMap.put("Group3", Color.cyan);
 		this.groupColorMap.put("Group4", Color.ORANGE);
+		this.groupColorMap.put("Group5", Color.GRAY);
+		this.groupColorMap.put("Group6", Color.green);
+		this.groupColorMap.put("Group7", Color.YELLOW);
+		this.groupColorMap.put("Group8", Color.PINK);
 	}
 
 	@Override
