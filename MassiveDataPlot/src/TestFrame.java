@@ -46,49 +46,59 @@ public class TestFrame extends JFrame{
 		btnTest.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				boolean canGoAhead = true;
+				int n = 0;
 				try {
-					int n = Integer.valueOf( txtSampleSize.getText() );
-					
-					lblRatio.setText("");
-					
-					// TODO Auto-generated method stub
-					int PANEL_WIDTH = originalDataPanel.getWidth();
-					int PANEL_HEIGHT = originalDataPanel.getHeight();
-					int axisLen = 300;
+					try {
+						n = Integer.valueOf( txtSampleSize.getText() );
+					}catch(Exception ex) {
+						JOptionPane.showMessageDialog( remote,
+						        "Sample size is only number type",
+						        "Sample size error",
+						        JOptionPane.ERROR_MESSAGE);
+						
+						canGoAhead = false;
+					}
 
-//					List<Point> data = DataGenerator.makeData( n );
-					List<Point> data = DataGenerator.readData( "/Users/insoo078/Desktop/metadata.txt");
-					List<Point> plotData = DataGenerator.compactDataToPlot(data, PANEL_WIDTH, PANEL_HEIGHT, axisLen);
-
-					System.out.println( "Original data : " + data.size() );
-					System.out.println( "Compacted data : " + plotData.size() );
-					System.out.println( ((1 - ((float)plotData.size() / data.size())) * 100) + "% points are collapsed");
-					
-					lblRatio.setText( ((1 - ((float)plotData.size() / data.size())) * 100) + "% points are shrinked" );
-
-					Thread t1 = new Thread(new Runnable() {
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							originalDataPanel.attachData( data );							
-						}
-					});
-					
-					Thread t2 = new Thread(new Runnable() {
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							collpaseDataPanel.attachData( plotData );							
-						}
-					});
-					
-					t1.start();
-					t2.start();
+					if( canGoAhead ) {
+						lblRatio.setText("");
+						
+						// TODO Auto-generated method stub
+						int PANEL_WIDTH = originalDataPanel.getWidth();
+						int PANEL_HEIGHT = originalDataPanel.getHeight();
+						int axisLen = 300;
+	
+	//					List<Point> data = DataGenerator.makeData( n );
+						List<Point> data = DataGenerator.readData( this.getClass().getResource("./data/metadata.txt" ).getFile() );
+						List<Point> plotData = DataGenerator.compactDataToPlot(data, PANEL_WIDTH, PANEL_HEIGHT, axisLen);
+	
+						System.out.println( "Original data : " + data.size() );
+						System.out.println( "Compacted data : " + plotData.size() );
+						System.out.println( ((1 - ((float)plotData.size() / data.size())) * 100) + "% points are collapsed");
+						
+						lblRatio.setText( ((1 - ((float)plotData.size() / data.size())) * 100) + "% points are shrinked" );
+	
+						Thread t1 = new Thread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								originalDataPanel.attachData( data );							
+							}
+						});
+						
+						Thread t2 = new Thread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								collpaseDataPanel.attachData( plotData );							
+							}
+						});
+						
+						t1.start();
+						t2.start();
+					}
 				}catch(Exception ex) {
-					JOptionPane.showMessageDialog( remote,
-					        "Sample size is only number type",
-					        "Sample size error",
-					        JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
 				}
 			}
 		});
