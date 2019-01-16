@@ -19,9 +19,6 @@ public class TestFrame extends JFrame{
 	private static final long serialVersionUID = 6687192929481066964L;
 	private TestPanel originalDataPanel;
 	private TestPanel collpaseDataPanel;
-	
-	private JLabel originalDataResult;
-	private JLabel collapsedDataResult;
 	private JLabel lblN;
 	private JTextField txtSampleSize;
 	
@@ -44,9 +41,6 @@ public class TestFrame extends JFrame{
 		
 		JLabel lblOriginalData = new JLabel("Original Data");
 		JLabel lblCollapsedData = new JLabel("Shrinked Data");
-		
-		this.originalDataResult = new JLabel("Result : ");
-		this.collapsedDataResult = new JLabel("Result : ");
 		
 		JButton btnTest = new JButton("Test");
 		btnTest.addActionListener( new ActionListener() {
@@ -74,7 +68,6 @@ public class TestFrame extends JFrame{
 					Thread t1 = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							originalDataResult.setText("Result : ");
 							// TODO Auto-generated method stub
 							originalDataPanel.attachData( data );							
 						}
@@ -83,7 +76,6 @@ public class TestFrame extends JFrame{
 					Thread t2 = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							collapsedDataResult.setText("Result : ");
 							// TODO Auto-generated method stub
 							collpaseDataPanel.attachData( plotData );							
 						}
@@ -106,7 +98,7 @@ public class TestFrame extends JFrame{
 		txtSampleSize.setColumns(10);
 		txtSampleSize.setText( "1000000" );
 		
-		lblRatio = new JLabel("");
+		lblRatio = new JLabel("test");
 
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -117,23 +109,21 @@ public class TestFrame extends JFrame{
 							.addContainerGap()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblOriginalData)
-								.addComponent(originalDataResult)
-								.addComponent(originalDataPanel, GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+								.addComponent(originalDataPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addGap(7)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblCollapsedData)
-								.addComponent(collapsedDataResult)
-								.addComponent(collpaseDataPanel, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
+								.addComponent(collpaseDataPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(174)
-							.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(128)
+							.addGap(132)
 							.addComponent(lblN)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(txtSampleSize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(49)
-							.addComponent(lblRatio)))
+							.addGap(18)
+							.addComponent(lblRatio, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(442)
+							.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -145,38 +135,18 @@ public class TestFrame extends JFrame{
 						.addComponent(lblCollapsedData))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(collpaseDataPanel, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-						.addComponent(originalDataPanel, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(originalDataResult)
-						.addComponent(collapsedDataResult))
+						.addComponent(collpaseDataPanel, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+						.addComponent(originalDataPanel, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblN)
 						.addComponent(txtSampleSize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblRatio))
-					.addGap(25)
+					.addGap(18)
 					.addComponent(btnTest)
-					.addContainerGap())
+					.addGap(35))
 		);
 		getContentPane().setLayout(groupLayout);
 		this.setVisible(true);
-	}
-
-	public JLabel getOriginalDataResult() {
-		return originalDataResult;
-	}
-
-	public void setOriginalDataResult(JLabel originalDataResult) {
-		this.originalDataResult = originalDataResult;
-	}
-
-	public JLabel getCollapsedDataResult() {
-		return collapsedDataResult;
-	}
-
-	public void setCollapsedDataResult(JLabel collapsedDataResult) {
-		this.collapsedDataResult = collapsedDataResult;
 	}
 }

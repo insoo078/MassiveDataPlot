@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.text.NumberFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class TestPanel extends JPanel {
 		this.type = type;
 		
 		this.groupColorMap = new LinkedHashMap<String, Color>();
-		this.groupColorMap.put("Group1", Color.pink);
+		this.groupColorMap.put("Group1", Color.magenta);
 		this.groupColorMap.put("Group2", Color.blue);
 		this.groupColorMap.put("Group3", Color.cyan);
 		this.groupColorMap.put("Group4", Color.ORANGE);
@@ -48,15 +49,14 @@ public class TestPanel extends JPanel {
 				int relativeY = (int) Math.floor( ((point.getY() - this.bound.getMinY()) / (this.bound.getMaxY() - this.bound.getMinY())) * height );
 				
 				g2.setColor( this.groupColorMap.get( point.getGroupName()) );
-				g2.fill( new Ellipse2D.Double(relativeX, relativeY, 2, 2) );
+				g2.fillOval( relativeX, relativeY, 2, 2);
 			}
 			long b = System.currentTimeMillis();
 			
 			String result = ((float)(b-a) / 1000) + "sec";
-			if( this.type == 1)
-				this.frame.getOriginalDataResult().setText(	"Result : " + result + "(n : "+this.data.size()+")" );
-			else
-				this.frame.getCollapsedDataResult().setText("Result : " + result + "(n : "+this.data.size()+")" );
+
+			g2.setColor( Color.black );
+			g2.drawString( "Result : " + result + "(n : "+NumberFormat.getInstance().format(this.data.size())+")" , 10, height - 20 );
 		}
 	}
 	
